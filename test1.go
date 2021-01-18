@@ -8,19 +8,28 @@ import (
 
 func main() {
 	//load properties file
-	propertiesInput, err := os.Open("./properties.txt")
+	properties_input, err := os.Open("./properties.txt")
 	if err != nil {
 		fmt.Println(err)
 	}
+
 	// setup reader
-	reader := csv.NewReader(propertiesInput)
+	reader := csv.NewReader(properties_input)
 	reader.Comma = '\t' // our list is delimited by tabs, not commas. alternatively surround addressess in the file with ""
 
 	// read file into nested slices
-	propertiesList, err := reader.ReadAll()
+	properties_list, err := reader.ReadAll()
 	if err !=nil {
 		fmt.Println(err)
 	}
 
-	fmt.Print(propertiesList)
+	// iterate through properties list
+	for i := range properties_list {
+		// remove blank entries (we'll keep first row headers as a sort of index)
+		if properties_list[i][1] == "" {
+			continue
+		}
+
+		fmt.Println(properties_list[i])
+	}
 }
