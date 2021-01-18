@@ -40,7 +40,7 @@ func main() {
 
 func sliceContainsAfter(slice [][]string, after_index int, compare_value []string) bool {
 	for _, v := range slice[after_index+1:] {
-		if compare_value[1] == v[1] && compare_value[2] == v[2] {
+		if compare_value[1] == v[1] && compare_value[2] == v[2] && compare_value[3] == v[3] {
 			return true
 		}
 	}
