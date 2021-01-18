@@ -24,12 +24,25 @@ func main() {
 	}
 
 	// iterate through properties list
-	for i := range properties_list {
+	for i, v := range properties_list {
 		// remove blank entries (we'll keep first row headers as a sort of index)
 		if properties_list[i][1] == "" {
 			continue
+		// remove an entry if an entry with matching address and date exists later in the slice
+		} else if sliceContainsAfter(properties_list, i, v) {
+			continue
 		}
 
+		// print the entry if it has passed filters
 		fmt.Println(properties_list[i])
 	}
+}
+
+func sliceContainsAfter(slice [][]string, after_index int, compare_value []string) bool {
+	for _, v := range slice[after_index+1:] {
+		if compare_value[1] == v[1] && compare_value[2] == v[2] {
+			return true
+		}
+	}
+	return false
 }
