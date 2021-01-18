@@ -27,24 +27,29 @@ func main() {
 
 	// iterate through properties list
 	for i, v := range properties_list {
-		// remove blank entries (we'll keep first row headers as a sort of index)
+		// always print the header row
+		if i == 0{
+			fmt.Println(v)
+			continue
+		}
+		// remove blank entries
 		if properties_list[i][1] == "" {
 			continue
 		}
 		// remove every tenth entry, still maintining the first row headers
-		if i%10 == 0 && i != 0{
+		if i%10 == 0 {
 			continue
 		}
+
 		// remove properties that are valuated below 400k
-		if i != 0 && v[4] != ""{
-			price, err := strconv.Atoi(v[4])
-			if err != nil {
-				fmt.Println(err)
-			}
-			if price < 400000 {
-				continue
-			}
+		price, err := strconv.Atoi(v[4])
+		if err != nil {
+			fmt.Println(err)
 		}
+		if price < 400000 {
+			continue
+		}
+
 		// remove properties with AVE, CRES, or PL in street name
 		if strings.Contains(v[1], "AVE") || strings.Contains(v[1], "CRES") || strings.Contains(v[1], "PL") {
 			continue

@@ -28,8 +28,9 @@ func main() {
 		// remove blank entries (we'll keep first row headers as a sort of index)
 		if properties_list[i][1] == "" {
 			continue
+		}
 		// remove an entry if an entry with matching address and date exists earlier in the slice
-		} else if sliceContainsBefore(properties_list, i, v) {
+		if sliceContainsBefore(properties_list, i, v) {
 			continue
 		}
 
