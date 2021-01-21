@@ -49,7 +49,7 @@ func main() {
 		var newProperty = record{row[0], row[1], row[2], row[3], row[4]}
 
 		// count duplicates
-		var duplicate_key = row[1]+row[2]+row[3]
+		var duplicate_key = newProperty.address + newProperty.town + newProperty.date
 		if v, found := duplicates[duplicate_key]; found {
 			v++
 		} else {
